@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var WebSocket = require("ws");
 var sqlite3 = require("sqlite3");
 var config = require("./config.json");
+var tr = require("./transaction.js");
 //console.log(config.http_port);
 
 var http_port = process.env.HTTP_PORT || 3001;
@@ -209,6 +210,9 @@ var responseLatestMsg = () => ({
 var write = (ws, message) => ws.send(JSON.stringify(message));
 var broadcast = (message) => sockets.forEach(socket => write(socket, message));
 
-connectToPeers(initialPeers);
-initHttpServer();
-initP2PServer();
+//connectToPeers(initialPeers);
+//initHttpServer();
+//initP2PServer();
+
+var transaction = new tr.Transaction();
+console.log(transaction.getTransaction());
